@@ -63,7 +63,6 @@ if [ -n "$1" ]; then
 			POST_DATA="fetch=false&st.page=${PAGE}&st.albumId=${ALBUM_ID}&st.friendId=${ST_FRIENDID}&st.lastelem=${ST_LASTELEM}&gwt.requested=${GWT_REQUESTED}"
 			DATA=$(wget -U "${AGENT}" -qO - --post-data "${POST_DATA}" "${PROFILE_LINK}/${ALBUM_ID}?cmd=UserAlbumPhotosMRB")
 			echo "[i] page:${PAGE}"
-			echo "$DATA" > page$PAGE.txt
 			for N in $(echo "$DATA" | grep -Eo 'id="img_[^"]+"'); do
 				if [[ "$N" =~ (id=\"img_([^\"]+)\") ]]; then
 					THUMB_ID="${BASH_REMATCH[2]}"
@@ -84,4 +83,3 @@ else
 	echo "usage $0 link_to_any_photo_in_albums"
 
 fi
-
